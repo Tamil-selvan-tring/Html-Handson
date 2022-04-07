@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign-in</title>
+    <style>
+        form{
+            line-height: 25px;
+        }
+        body{
+            background-color: #497a71;
+            }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <div>
+        <form action="" id="frm" onsubmit="chk()">
+            <label> Enter Username</label>
+            <input type="text" id="usrin"><br>
+            <label>Password</label>
+            <input type="password" id="pwd"><br>
+            <a href="Signup.html" id="sign-up">Don't have an account? Sign up</a>
+            <input type="submit"  value="Login">
+        </form>
+    </div>
+    <script>
+        function chk()
+        {
+            let obj=JSON.parse(localStorage.getItem("uscr"));
+            var usr=document.getElementById("usrin").value;
+            var pw=document.getElementById("pwd").value;
+            for(var i=0;i<obj.length;i++)
+            {
+                    if(obj[i]["username"]==usr)
+                        {
+                            if(obj[i]["password"]==pw)
+                            {
+                                document.getElementById("frm").action="To-Do.html";
+                            }
+                            else
+                            {
+                                alert("Password mismatch");
+                            }
+                        }
+            }
+        }
+        
+    </script>
+</body>
+</html>

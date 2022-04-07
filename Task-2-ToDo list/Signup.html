@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign-up</title>
+    <style>
+        form{
+            line-height: 25px;
+        } 
+        body{
+            background-color: #497a71;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter credentials</h2>
+    <div>
+        <form onsubmit="chk()">
+            <label> Username</label>
+            <input type="text" id="usrin"><br>
+            <label> Password</label>
+            <input type="text" id="pw"><br>
+            <label>Re-enter Password</label>
+            <input type="text" id="cpw"><br>
+            <label> Email-id</label>
+            <input type="text" id="mail"><br>
+            <input type="submit" value="Create account">
+        </form>
+    </div>
+    <script>
+        var obj;
+        function chk()
+        {
+        var usn=document.getElementById('usrin').value;
+        var pw=document.getElementById('pw').value;
+        var cpw=document.getElementById('cpw').value;
+        var mail=document.getElementById('mail').value;
+        if(localStorage.getItem("uscr"))
+        {
+            obj=JSON.parse(localStorage.getItem("uscr"));
+                if(!userExists(usn))
+                {
+                    if(pw==cpw)
+                    {
+                        if(obj.push({username:usn,email:mail,password:pw}))
+                        {    
+                        alert("user created");
+                        location.href='Index.html';
+                        localStorage.setItem("uscr",JSON.stringify(obj));
+                        }
+                        else
+                            alert("user creation failed");
+                        Console.log(obj.length);
+                    }
+                    else
+                    {
+                        alert("Password mismatch");
+                    }
+                }
+                else{
+                    alert("Enter valid username");
+                }
+                function userExists(name) {
+                    return obj.some(function(el) {
+                        return el.username === name;
+                    }); 
+                    }
+        }
+        else
+        {
+                if(pw==cpw)
+                {
+                obj=[{username:usn,email:mail,password:pw}];
+                localStorage.setItem("uscr",JSON.stringify(obj));
+                location.href='Index.html';
+                localStorage.setItem("uscr",JSON.stringify(obj));
+                alert("User created");
+                console.log(obj.length);
+                }
+                else
+                {
+                    alert("Password mismatch");
+                    Console.log(obj.length);
+                }
+        }
+    }            
+</script>
+</body>
+</html>

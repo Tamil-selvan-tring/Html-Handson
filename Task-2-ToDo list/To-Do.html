@@ -1,0 +1,71 @@
+<html>
+<head>
+    <title>To-Do-List</title>
+    <style>
+        body{
+            background-color: #497a71;
+        }
+    </style>
+</head>
+<body>
+    <h3><center>To-Do-List</h1>
+    <div>
+        <label>Enter Task</label>
+        <input type="text" id="task">
+        <ol id="out"></ol>
+        <button type="button" id="add" onclick="add()">Add</button>
+        <button type="button" onclick="clr()">Clear all</button>
+        <button type="button"onclick="save()">Save</button>
+        <button type="button" onclick="cr()">Clear</button>
+        <button type="button" onclick="show()"> Show saved</button>
+        <script>
+            var list=document.getElementById("out");
+            var i=1;
+            var j=1;
+            function add()
+            {
+                let li=document.createElement("li");
+                let idval= i.toString();
+                li.setAttribute("id",idval);
+                li.appendChild(document.createTextNode(document.getElementById("task").value));
+                list.appendChild(li);
+                document.getElementById(idval).addEventListener('dblclick',ch=>
+                {
+                    document.getElementById(idval).style.textDecoration="line-through";
+                });
+                i++;
+                document.getElementById("task").value='';
+            }
+            function cr()
+            {
+                while(j<=i)
+                {
+                    let idval= j.toString();
+                    let item= document.getElementById(idval);
+                    if(document.getElementById(idval).style.textDecoration=="line-through")
+                    {
+                    let idval= j.toString();
+                    let item= document.getElementById(idval);
+                    list.removeChild(item); 
+                    }
+                    j++;
+                }
+            }
+            function clr()
+            {
+                list.innerHTML = '';
+                localStorage.removeItem("Items");
+            }
+            function save()
+            {
+                localStorage.setItem("Items",JSON.stringify(document.getElementById("out").innerHTML));
+            }
+            function show()
+            {
+                var out=JSON.parse(localStorage.getItem("Items"));
+                list.innerHTML= out;
+            }
+        </script>
+    </div> 
+</body>
+</html>

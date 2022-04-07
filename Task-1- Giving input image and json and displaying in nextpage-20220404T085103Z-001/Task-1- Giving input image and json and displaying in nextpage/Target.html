@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #imgout{
+            height: 300px;
+            width: 300px;
+            }
+    </style>
+    
+</head>
+<body>
+    <img src="" id="imgout"/><br>
+    <label>Age</label><br>
+    <input type="text" name="age" />
+    <br>
+    <label>Name</label><br>
+    <input type="text" name="name" />
+    <br>
+    <label>Gender</label><br>
+    
+    <input type="text" name="gender"/>
+    <br>
+    <label>Address</label><br>
+    <input type="text" name="address"/>
+    <br>
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+        const recentImageDataUrl=localStorage.getItem("inputimage");
+        if(recentImageDataUrl)
+        {
+        document.querySelector("#imgout").setAttribute("src",recentImageDataUrl); 
+        }
+        });
+        let ob = localStorage.getItem("jfile");
+        var obj=JSON.parse(ob); 
+        for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if(key=="Name")
+            {
+                document.getElementsByName('name')[0].value= obj[key];
+            }
+            else if(key=="Age")
+            {
+                document.getElementsByName('age')[0].value= obj[key];
+            }
+            else if(key=="Gender")
+            {
+                document.getElementsByName('gender')[0].value= obj[key];
+            }
+            else if(key=="Address")
+            {
+                document.getElementsByName('address')[0].value= obj[key];
+            }
+            
+        }
+        }
+        </script>
+</body>
+</html>

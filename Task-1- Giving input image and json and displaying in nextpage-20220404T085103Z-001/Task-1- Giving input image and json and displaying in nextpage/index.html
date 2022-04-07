@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <style>
+        body{
+           background-image: url(https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg);
+           font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+           line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+       <center>
+            Task 1
+       </center> 
+    </h1>
+    <form action="Target.html" >
+        <label>Upload a image</label><br>
+        <input type="file" accept="image\*" id="inputimg">
+        <input type="file" accept=".json" id="jinput">
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        document.querySelector("#inputimg").addEventListener("change",function(){
+        const reader=new FileReader();
+        reader.addEventListener("load",()=>{
+        localStorage.setItem("inputimage", reader.result);
+
+        }); 
+        reader.readAsDataURL(this.files[0]);
+        });
+       
+        document.getElementById("jinput").addEventListener("change", function() {
+          var infile = document.getElementById("jinput").files[0];
+          var fileread = new FileReader();
+          fileread.onload = function(e) {
+            var content = e.target.result;
+            var data = JSON.parse(content); 
+            localStorage.setItem("jfile", JSON.stringify(data));
+          };
+          fileread.readAsText(infile);
+        });
+        </script>
+</body>
+</html>
